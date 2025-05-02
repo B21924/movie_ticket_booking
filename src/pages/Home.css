@@ -1,0 +1,281 @@
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #111;
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.navbar-logo {
+  color: #ff6347;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-links .nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.navbar-links .nav-link:hover {
+  color: #ff6347;
+}
+
+/* Responsive navbar (hamburger menu) */
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger-menu div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px 0;
+}
+
+.navbar-links {
+  display: flex;
+}
+
+.navbar-links.active {
+  display: block;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background-color: #111;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.navbar-links li {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.navbar-links li a {
+  font-size: 1.5rem;
+}
+
+/* Home Page Title */
+.home-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 100px 0 20px 0; /* Adjust margin to account for fixed navbar */
+  color: #333;
+}
+
+/* Movie Grid */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.movie-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-bottom: 2px solid #f1f1f1;
+}
+
+.movie-details {
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.movie-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin: 10px 0;
+}
+
+.movie-description {
+  color: #777;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.movie-price {
+  color: #e74c3c;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.book-button {
+  display: inline-block;
+  background-color: #ff6347;
+  color: white;
+  padding: 8px 16px; /* Reduced padding for smaller size */
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-top: auto; /* Push the button to the bottom of the card */
+  width: auto; /* Button width adjusts to text */
+  text-align: center; /* Center text inside the button */
+  font-size: 1rem; /* Smaller font size */
+}
+
+.book-button:hover {
+  background-color: #e74c3c;
+}
+
+.loading-message {
+  font-size: 1.5rem;
+  text-align: center;
+  color: #888;
+  margin-top: 50px;
+}
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 400px; /* Adjust height as needed */
+  background-image: url('https://wallpaperaccess.com/full/4839516.jpg'); /* Replace with your image URL */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.hero-content {
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.hero-button {
+  background-color: #ff6347;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.hero-button:hover {
+  background-color: #e74c3c;
+}
+
+/* Movie Card Grid */
+.home-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 20px 0;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.movie-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.movie-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.movie-details {
+  padding: 10px;
+  text-align: center;
+}
+
+.movie-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.movie-description {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.movie-price {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.book-button {
+  display: block;
+  margin: 20px auto;
+  background-color: #ff6347;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.book-button:hover {
+  background-color: #e74c3c;
+}
+
+/* Loading message */
+.loading-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+}
