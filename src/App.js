@@ -10,7 +10,7 @@ const App = () => {
   return (
     <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route exact path="/{app-name}" component={Home} />
           <Route path="/add-movie" element={<AddMovie />} />
           <Route path="/book/:movieId" element={<BookMovie />} />
         </Routes>
