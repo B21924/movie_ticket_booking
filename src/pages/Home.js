@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
-import './Home.css'; // Import Home page styles
+import './Home.css';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -13,11 +14,18 @@ const Home = () => {
         const querySnapshot = await getDocs(collection(db, 'movies'));
         const moviesList = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data(),
+          name: doc.data().name || '',
+          description: doc.data().description || '',
+          price: doc.data().price || 0,
+          image: doc.data().image || '',
+          showTimings: Array.isArray(doc.data().showTimings) ? doc.data().showTimings : [],
+          bookedSeats: Array.isArray(doc.data().bookedSeats) ? doc.data().bookedSeats : []
         }));
         setMovies(moviesList);
       } catch (error) {
         console.error('Error fetching movies:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -26,7 +34,6 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Nav Bar */}
       <nav className="navbar">
         <div className="navbar-logo">MovieHub</div>
         <ul className="navbar-links">
@@ -35,7 +42,6 @@ const Home = () => {
         </ul>
       </nav>
 
-      {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">🎬 Welcome to MovieHub</h1>
@@ -44,28 +50,42 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Home Page Title */}
       <h1 className="home-title">🎬 Now Showing</h1>
 
-      {/* Movie Grid */}
       <div className="movies-grid">
-        {movies.length === 0 ? (
+        {loading ? (
           <div className="loading-message">Loading movies...</div>
+        ) : movies.length === 0 ? (
+          <div className="no-movies">No movies available</div>
         ) : (
           movies.map((movie) => (
             <div key={movie.id} className="movie-card">
-              {/* Display movie image */}
-              {movie.image && (
-                <img
-                  src={movie.image}
-                  alt={movie.name}
-                  className="movie-image"
-                />
-              )}
+              <img
+                src={movie.image}
+                alt={movie.name}
+                className="movie-image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = 'https://via.placeholder.com/300x450?text=No+Image';
+                }}
+              />
               <div className="movie-details">
                 <h2 className="movie-name">{movie.name}</h2>
-                <p className="movie-description">{movie.description}</p>
-                <p className="movie-price">Price: ₹{movie.price}</p>
+                <p className="movie-description">
+                  {movie.description.length > 100
+                    ? `${movie.description.substring(0, 100)}...`
+                    : movie.description}
+                </p>
+                <p className="movie-price">₹{movie.price}</p>
+                {movie.showTimings.length > 0 && (
+                  <p className="show-timings">
+                    {movie.showTimings.slice(0, 2).join(', ')}
+                    {movie.showTimings.length > 2 ? '...' : ''}
+                  </p>
+                )}
+                <p className="seat-availability">
+                  {movie.bookedSeats.length} / {50} seats booked
+                </p>
                 <Link to={`/book/${movie.id}`} className="book-button">
                   Book Now
                 </Link>

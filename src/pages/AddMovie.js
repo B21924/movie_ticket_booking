@@ -8,6 +8,16 @@ const AddMovie = () => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [imageUrl, setImageUrl] = useState(''); // State to hold the image URL
+  const [showTimings, setShowTimings] = useState([]); // State to hold show timings
+  const [newTiming, setNewTiming] = useState(''); // State for new show timing
+
+  // Function to handle adding a new show timing
+  const handleAddTiming = () => {
+    if (newTiming) {
+      setShowTimings((prevTimings) => [...prevTimings, newTiming]);
+      setNewTiming(''); // Clear input after adding
+    }
+  };
 
   const handleAddMovie = async (e) => {
     e.preventDefault();
@@ -25,6 +35,7 @@ const AddMovie = () => {
         price: Number(price),
         bookedSeats: 0,
         image: imageUrl, // Store the image URL in Firestore
+        showTimings, // Store the show timings in Firestore
       });
 
       alert('🎬 Movie added successfully!');
@@ -32,6 +43,7 @@ const AddMovie = () => {
       setDescription('');
       setPrice('');
       setImageUrl(''); // Clear the image URL field
+      setShowTimings([]); // Clear the show timings list
     } catch (error) {
       alert('Error adding movie: ' + error.message);
     }
@@ -73,6 +85,26 @@ const AddMovie = () => {
           required
           className="input-field"
         />
+
+        {/* Show Timings Input */}
+        <input
+          type="text"
+          placeholder="Add Show Timing (e.g., 10:00 AM)"
+          value={newTiming}
+          onChange={(e) => setNewTiming(e.target.value)}
+          className="input-field"
+        />
+        <button type="button" onClick={handleAddTiming} className="submit-button">
+          Add Timing
+        </button>
+
+        {/* Show list of added show timings */}
+        <ul>
+          {showTimings.map((timing, index) => (
+            <li key={index}>{timing}</li>
+          ))}
+        </ul>
+
         <button type="submit" className="submit-button">
           Add Movie
         </button>
