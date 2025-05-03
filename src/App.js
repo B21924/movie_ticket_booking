@@ -8,7 +8,7 @@ import './App.css';
 
 const App = () => {
   return (
-    <Router>
+    <Router basename="/movie_ticket_booking">
         <Routes>
           <Route exact path="/{app-name}" component={Home} />
           <Route path="/add-movie" element={<AddMovie />} />
